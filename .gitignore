@@ -1,0 +1,13 @@
+/lib
+node_modules
+/_exports
+/docker
+/sec.config.json
+/sec-config.yaml
+/node_modules
+/junit.xml
+/test-file-*
+/dist-clients
+/betterportal-db
+/certs
+/bettercorp-betterportal-9.0.2.tgz
