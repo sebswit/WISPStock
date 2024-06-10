@@ -7,10 +7,10 @@ import {
 } from "@bettercorp/service-base";
 import {BetterPortalUIClient} from "@bettercorp/betterportal/lib/plugins/service-betterportal/plugin";
 import {z} from "zod";
-import {CFTurnstiles} from "@bettercorp/service-base-plugin-cloudflare-turnstiles";
+//import {CFTurnstiles} from "@bettercorp/service-base-plugin-cloudflare-turnstiles";
 import {T_SUPPORTED_THEMES, SUPPORTED_THEMES, RegisterViews} from "./views/betterportal";
 import DocumentStore from "ravendb";
-import {readFileSync} from "fs";
+//import {readFileSync} from "fs";
 
 export const secSchema = z.object({
   db: z.object({
@@ -59,7 +59,8 @@ export class Plugin
   runBeforePlugins?: string[] | undefined;
   runAfterPlugins?: string[] | undefined;
   methods = {};
-  public CFTurnstiles: CFTurnstiles;
+
+  //public CFTurnstiles: CFTurnstiles;
 
   dispose(): void {
     this.RavenDB.dispose();
@@ -73,18 +74,11 @@ export class Plugin
 
   constructor(config: BSBServiceConstructor) {
     super(config);
-    this.CFTurnstiles = new CFTurnstiles(this);
+    //this.CFTurnstiles = new CFTurnstiles(this);
     this.bpClient = new BetterPortalUIClient(this, SUPPORTED_THEMES);
     this.RavenDB = new DocumentStore(
         this.config.db.url,
         this.config.db.databaseName,
-        {
-          type: this.config.db.auth?.type,
-          certificate: this.config.db.auth?.certificateFile ? readFileSync(this.config.db.auth?.certificateFile)
-                                                            : undefined,
-          password: this.config.db.auth?.password,
-          ca: this.config.db.auth?.caFile ? readFileSync(this.config.db.auth?.caFile) : undefined,
-        },
     );
     this.RavenDB.initialize();
     this.log.info(`Ready DB [RAVEN]`);
